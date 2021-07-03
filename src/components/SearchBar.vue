@@ -1,17 +1,15 @@
 <template>
     <div id="searchbar-container">
         <input type="text" id="search-bar" :style="setStyles" v-model="userGithub">
-        <!-- <i class="fas fa-search" @click="searchUser"></i> -->
+        <i class="fas fa-search" @click="searchUser"></i>
     </div>
 </template>
 
 <script>
-import SearchIcon from './SearchIcon.vue'
 
 export default {
     name: 'SearchBar',
     components: {
-        SearchIcon
     },
     props: {
         searchWidth: {
@@ -54,7 +52,7 @@ export default {
             return{
                 width: this.searchWidth
             }
-        }
+        },
     }
 }
 </script>
@@ -73,7 +71,7 @@ export default {
     outline: none;
 }
 
-/* i {
+i {
     font-size: 12px;
     color: white;
     background-color: black;
@@ -85,7 +83,7 @@ export default {
     i {
         font-size: 14px;
     }
-} */
+}
 
 @media screen and (max-width: 465px){
 

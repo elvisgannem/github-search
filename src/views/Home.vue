@@ -1,23 +1,18 @@
 <template>
   <div class="home">
     <Title :size="fontSize" />
-    <div>
-      <SearchBar :searchWidth="searchWidth"/>
-      <SearchIcon @send="show" />
-    </div>
+    <SearchBar :searchWidth="searchWidth"/>
   </div>
 </template>
 
 <script>
 
 import SearchBar from '../components/SearchBar.vue'
-import SearchIcon from '../components/SearchIcon.vue'
 import Title from '../components/Title.vue'
 
 export default {
   components: {
     SearchBar,
-    SearchIcon,
     Title,
   },
   data(){
@@ -27,9 +22,7 @@ export default {
     }
   },
   methods: {
-    show(){
-      console.log('diste clic')
-    }
+    
   }
 }
 </script>
@@ -45,22 +38,6 @@ export default {
   gap: 0.5rem;
 }
 
-.home div {
-  display: flex;
-}
 
-i {
-    font-size: 12px;
-    color: white;
-    background-color: black;
-    padding: 7px 18px;
-}
-
-@media screen and (min-width: 768px){
-
-    i {
-        font-size: 14px;
-    }
-}
 
 </style>

@@ -9,14 +9,12 @@
 <script>
 import Title from '../Title.vue'
 import SearchBar from '../SearchBar.vue'
-import SearchIcon from '../SearchIcon.vue'
 
 export default {
     name: 'Header',
     components: {
         Title,
         SearchBar,
-        SearchIcon
     },
     data(){
         return {
