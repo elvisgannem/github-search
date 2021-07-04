@@ -7,6 +7,8 @@
 
 <script>
 
+import { mapState, mapMutations } from 'vuex'
+
 export default {
     name: 'SearchBar',
     components: {
@@ -23,29 +25,30 @@ export default {
     },
     data(){
         return {
-            userName: null,
-            fullName: null,
-            publicRepos: null,
-            location: null,
-            followers: null,
-            userAvatar: null
+            // userName: null,
+            // fullName: null,
+            // publicRepos: null,
+            // location: null,
+            // followers: null,
+            // userAvatar: null
         }
     },
     methods: {
-        async searchUser(){
-            const response = await fetch(`https://api.github.com/users/${this.userGithub}`)
-            const data = await response.json()
-            this.userName = data.login
-            this.fullName = data.name
-            this.publicRepos = data.public_repos
-            this.location = data.location
-            this.followers = data.followers
-            this.userAvatar = data.avatar_url
-            console.log(this.userName + ' ' + this.fullName + ' ' + this.publicRepos + ' ' + this.location + ' ' +this.followers + ' ' +this.userAvatar)
-        },
+        // async searchUser(){
+        //     const response = await fetch(`https://api.github.com/users/${this.userGithub}`)
+        //     const data = await response.json()
+        //     this.userName = data.login
+        //     this.fullName = data.name
+        //     this.publicRepos = data.public_repos
+        //     this.location = data.location
+        //     this.followers = data.followers
+        //     this.userAvatar = data.avatar_url
+        //     console.log(this.userName + ' ' + this.fullName + ' ' + this.publicRepos + ' ' + this.location + ' ' +this.followers + ' ' +this.userAvatar)
+        // },
         log(){
             console.log(this.userGithub)
-        }
+        },
+        ...mapMutations([''])
     },
     computed: {
         setStyles(){
@@ -53,6 +56,7 @@ export default {
                 width: this.searchWidth
             }
         },
+        ...mapState([''])
     }
 }
 </script>

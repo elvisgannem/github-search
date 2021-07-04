@@ -9,6 +9,7 @@
 
 import SearchBar from '../components/SearchBar.vue'
 import Title from '../components/Title.vue'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -23,6 +24,9 @@ export default {
   },
   methods: {
     
+  },
+  computed: {
+    ...mapState(['number'])
   }
 }
 </script>
