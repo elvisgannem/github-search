@@ -1,17 +1,35 @@
 <template>
-<div class="repositories">
-    <h2>sistema-comentario</h2>
-    <p>Descrição: Experimentações - Sistema de comentários usando vue-js</p>
-    <div id="stars">
-        <img src="/images/icons/star.svg" alt="Reputação do Repositório">
-        <p>0</p>
+<div v-if="repositories.length > 0">
+    
+    <div class="repositories" v-for="(repo, index) in repositories" :key="index">
+        <h2><a :href="repo.html_url" target="_blank">{{repo.name}}</a></h2>
+        <p v-if="repo.description !== null">Descrição: {{repo.description}}</p>
+        <p v-else>Este repositório não tem descrição</p>
+        <div id="stars">
+            <img src="/images/icons/star.svg" alt="Reputação do Repositório">
+            <p>{{repo.stargazers_count}}</p>
+            
+        </div>
     </div>
 </div>
+
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
+
 export default {
-    name: 'Repositories'
+    name: 'Repositories',
+    computed: {
+        ...mapState(['repositories'])
+    },
+    methods: {
+        click(){
+            console.log(this.repositories)
+        }
+    }
+
 }
 </script>
 
@@ -21,6 +39,7 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
+    margin-bottom: 1.8rem;
 }
 
 .repositories h2, .repositories p {
@@ -46,6 +65,7 @@ export default {
     .repositories {
         margin-top: 1rem;
         align-items: center;
+        padding: 0 0.5rem;
     }
 }
 </style>

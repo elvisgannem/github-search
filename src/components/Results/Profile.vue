@@ -1,34 +1,35 @@
 <template>
 
-<div id="profile-content">
-    <img :src="image" alt="Foto de perfil do usuario" id="profile-picture">
-    <h2>Elvis Gannem</h2>
-    <h3>elvisgannem</h3>
+<div id="profile-content" v-if="userName !== null">
+    <img :src="userAvatar" alt="Foto do usuário" id="profile-picture">
+    <h2>{{fullName}}</h2>
+    <h3>{{userName}}</h3>
 
     <div id="data-icons">
-        <div class="icon">
+        <div class="icon" v-if="company !== null">
             <img src="/images/icons/organization.svg" alt="">
-            <p>Lux One</p>
+            <p>{{company}}</p>
+            
         </div>
         
-        <div class="icon">
+        <div class="icon" v-if="location !== null">
             <img src="/images/icons/location.svg" alt="">
-            <p>Fortaleza, CE</p>
+            <p>{{location}}</p>
         </div>
         
         <div class="icon">
             <img src="/images/icons/star.svg" alt="">
-            <p>0</p>
+            <p>{{starred}}</p>
         </div>
         
-        <div class="icon">
+        <div class="icon" v-if="publicRepos !== null">
             <img src="/images/icons/repositories.svg" alt="">
-            <p>20</p>
+            <p>{{publicRepos}}</p>
         </div>
         
-        <div class="icon">
+        <div class="icon" v-if="followers !== null">
             <img src="/images/icons/followers.svg" alt="">
-            <p>4</p>
+            <p>{{followers}}</p>
         </div>
 
     </div>
@@ -36,12 +37,13 @@
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
+
 export default {
     name: 'Profile',
-    data(){
-        return {
-            image: 'https://github.com/elvisgannem.png'
-        }
+    computed: {
+        ...mapState(['userName', 'fullName', 'publicRepos', 'location', 'followers', 'userAvatar', 'company', 'starred'])
     }
 }
 </script>

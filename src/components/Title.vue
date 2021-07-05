@@ -1,5 +1,5 @@
 <template>
-<h1 :style="titleStyles">Github <span>Search</span></h1>
+<h1 :style="titleStyles"><router-link to="/">Github <span>Search</span></router-link></h1>
 </template>
 
 

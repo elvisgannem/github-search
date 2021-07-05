@@ -1,6 +1,6 @@
 <template>
     <div id="searchbar-container">
-        <input type="text" id="search-bar" :style="setStyles" v-model="userGithub">
+        <input type="text" id="search-bar" :style="setStyles" v-model="userGithub" @keyup.enter="searchUser">
         <i class="fas fa-search" @click="searchUser"></i>
     </div>
 </template>
@@ -25,38 +25,73 @@ export default {
     },
     data(){
         return {
-            // userName: null,
-            // fullName: null,
-            // publicRepos: null,
-            // location: null,
-            // followers: null,
-            // userAvatar: null
+            userNameTemp: null,
+            fullNameTemp: null,
+            publicReposTemp: null,
+            locationTemp: null,
+            followersTemp: null,
+            userAvatarTemp: null,
+            companyTemp: null,
+            repositoriesTemp: [],
+            showFriendlyMsg: false
         }
     },
     methods: {
-        // async searchUser(){
-        //     const response = await fetch(`https://api.github.com/users/${this.userGithub}`)
-        //     const data = await response.json()
-        //     this.userName = data.login
-        //     this.fullName = data.name
-        //     this.publicRepos = data.public_repos
-        //     this.location = data.location
-        //     this.followers = data.followers
-        //     this.userAvatar = data.avatar_url
-        //     console.log(this.userName + ' ' + this.fullName + ' ' + this.publicRepos + ' ' + this.location + ' ' +this.followers + ' ' +this.userAvatar)
-        // },
-        log(){
-            console.log(this.userGithub)
+        async searchRepos(){
+            const response = await fetch(`https://api.github.com/users/${this.userGithub}/repos`)
+            const data = await response.json()
+            this.repositoriesTemp = data
+            this.setRepositories(this.repositoriesTemp)
+
+        //ff the req is satisfactory, send to results page to show the user.
+            if(response.status === 200){
+                this.$router.push({path: '/results'})
+            } else {
+                alert('O usuário não existe, por favor, tente novamente')
+            }
         },
-        ...mapMutations([''])
+
+        async searchStarred(){
+            //define the starred as the length of the called array.
+            const response = await fetch(`https://api.github.com/users/${this.userGithub}/starred`)
+            const data = await response.json()
+            this.setStarred(data.length)
+        },
+
+        async searchUser(){
+            //defines all user data
+            const response = await fetch(`https://api.github.com/users/${this.userGithub}`)
+            const data = await response.json()
+            this.userNameTemp = data.login
+            this.fullNameTemp = data.name
+            this.publicReposTemp = data.public_repos
+            this.locationTemp = data.location
+            this.followersTemp = data.followers
+            this.userAvatarTemp = data.avatar_url
+            this.companyTemp = data.company
+            
+            this.setUserName(this.userNameTemp)
+            this.setFullName(this.fullNameTemp)
+            this.setPublicRepos(this.publicReposTemp)
+            this.setLocation(this.locationTemp)
+            this.setFollowers(this.followersTemp)
+            this.setUserAvatar(this.userAvatarTemp)
+            this.setCompany(this.companyTemp)
+
+            this.searchRepos()
+            this.searchStarred()
+        },
+        ...mapMutations(['setUserName', 'setFullName', 'setPublicRepos', 'setLocation', 'setFollowers', 'setUserAvatar', 'setCompany', 'setRepositories', 'setStarred']),
     },
+
+    
     computed: {
         setStyles(){
             return{
                 width: this.searchWidth
             }
         },
-        ...mapState([''])
+        ...mapState(['userName', 'fullName', 'publicRepos', 'location', 'followers', 'userAvatar', 'company'])
     }
 }
 </script>
@@ -79,7 +114,13 @@ i {
     font-size: 12px;
     color: white;
     background-color: black;
-    padding: 7px 18px;
+    padding: 8px 18px;
+}
+
+.friendlyMsg {
+    font-family: 'Rubik';
+    font-size: 0.8rem;
+    padding-top: 0.5rem;
 }
 
 @media screen and (min-width: 768px){
