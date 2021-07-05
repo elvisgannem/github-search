@@ -33,7 +33,8 @@ export default {
             userAvatarTemp: null,
             companyTemp: null,
             repositoriesTemp: [],
-            showFriendlyMsg: false
+            showFriendlyMsg: false,
+            profileUrlTemp: null
         }
     },
     methods: {
@@ -69,6 +70,7 @@ export default {
             this.followersTemp = data.followers
             this.userAvatarTemp = data.avatar_url
             this.companyTemp = data.company
+            this.profileUrlTemp = data.html_url 
             
             this.setUserName(this.userNameTemp)
             this.setFullName(this.fullNameTemp)
@@ -77,11 +79,12 @@ export default {
             this.setFollowers(this.followersTemp)
             this.setUserAvatar(this.userAvatarTemp)
             this.setCompany(this.companyTemp)
+            this.setProfileUrl(this.profileUrlTemp)
 
             this.searchRepos()
             this.searchStarred()
         },
-        ...mapMutations(['setUserName', 'setFullName', 'setPublicRepos', 'setLocation', 'setFollowers', 'setUserAvatar', 'setCompany', 'setRepositories', 'setStarred']),
+        ...mapMutations(['setUserName', 'setFullName', 'setPublicRepos', 'setLocation', 'setFollowers', 'setUserAvatar', 'setCompany', 'setRepositories', 'setStarred', 'setProfileUrl']),
     },
 
     

@@ -10,7 +10,8 @@ export default createStore({
     userAvatar: null,
     company: null,
     repositories: [],
-    starred: null
+    starred: null,
+    profileUrl: null
   },
   mutations: {
     setUserName(state, value){
@@ -40,6 +41,9 @@ export default createStore({
     setStarred(state, value){
       state.starred = value
     },
+    setProfileUrl(state, value){
+      state.profileUrl = value
+    }
   },
   actions: {
   },

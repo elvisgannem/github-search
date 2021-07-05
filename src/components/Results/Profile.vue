@@ -1,9 +1,11 @@
 <template>
 
 <div id="profile-content" v-if="userName !== null">
+    <a :href="profileUrl" target="__blank">
     <img :src="userAvatar" alt="Foto do usuário" id="profile-picture">
     <h2>{{fullName}}</h2>
     <h3>{{userName}}</h3>
+    </a>
 
     <div id="data-icons">
         <div class="icon" v-if="company !== null">
@@ -42,8 +44,13 @@ import { mapState } from 'vuex'
 
 export default {
     name: 'Profile',
+    data(){
+        return {
+            
+        }
+    },
     computed: {
-        ...mapState(['userName', 'fullName', 'publicRepos', 'location', 'followers', 'userAvatar', 'company', 'starred'])
+        ...mapState(['userName', 'fullName', 'publicRepos', 'location', 'followers', 'userAvatar', 'company', 'starred', 'profileUrl'])
     }
 }
 </script>

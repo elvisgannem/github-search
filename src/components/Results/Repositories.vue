@@ -21,13 +21,13 @@ import { mapState } from 'vuex'
 
 export default {
     name: 'Repositories',
+    data(){
+        return {
+            // filterText: ''
+        }
+    },
     computed: {
         ...mapState(['repositories'])
-    },
-    methods: {
-        click(){
-            console.log(this.repositories)
-        }
     }
 
 }
